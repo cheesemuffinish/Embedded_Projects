@@ -1,6 +1,12 @@
-//This program converts a string into the morse code
-//equivalent on an LED
 
+//------------------------------------------------------------------------
+//              Audrey Long - Project 1 - 02-08-2020
+// This program converts a string into the morse code equivalent on an LED
+//------------------------------------------------------------------------
+
+//----------------------------------------------------------------
+// Varibles to be user throughout the Project
+//----------------------------------------------------------------
 int dotLength = 100;
 int spaceLength = 250;
 int gapLength = 50;
@@ -15,7 +21,9 @@ char *morseLetters[] = {
   "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--..", " "
 };
 
-
+//----------------------------------------------------------------
+// Function to setup the serial connection and pin establishment
+//----------------------------------------------------------------
 void setup() {
 
   pinMode (inputPin, OUTPUT);
@@ -24,17 +32,23 @@ void setup() {
 
 }
 
+//----------------------------------------------------------------
+// Main loop
+//----------------------------------------------------------------
+
 void loop() {
   getInput();
 
 }
 
+//-------------------------------------------------------------------
+// Function to get the correct user input and convert into Morse code
+//-------------------------------------------------------------------
+
 void getInput() {
   static byte index = 0;
   char endMarker = '\n';
   char readChar;
-
-
 
   while (Serial.available() > 0 && !finished ) {
     readChar = tolower(Serial.read());
@@ -74,6 +88,10 @@ void getInput() {
   }
 }
 
+//----------------------------------------------------------------
+// Function to display the character to corresponsing LED behavior
+//----------------------------------------------------------------
+
 void displayMorse(int letter) {
 
   char* morseLetter = morseLetters[letter];
@@ -88,6 +106,9 @@ void displayMorse(int letter) {
   };
 }
 
+//--------------------------------------------------------------
+// Function to convert Morse code string with lenth of LED blink
+//--------------------------------------------------------------
 void flashLED(char symbol) {
 
   if (symbol == '.')
