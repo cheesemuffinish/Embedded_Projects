@@ -2,8 +2,8 @@
  * Optical Tachometer
  *
  * Uses an IR LED and IR phototransistor to implement an optical tachometer.
- * The IR LED is connected to pin 13 and ran continually. A status LED is connected
- * to pin 12. Pin 2 (interrupt 0) is connected across the IR detector.
+ * The IR LED is connected to pin 13 and ran continually.  
+ * (interrupt 0) is connected across the IR detector.
  *
  * 
  */
@@ -58,11 +58,8 @@ void setup()
  {
    //Update RPM every second
    delay(1000);
-   //Don't process interrupts during calculations
    detachInterrupt(0);
-   //Note that this would be 60*1000/(millis() - timeold)*rpmcount if the interrupt
-   //happened once per revolution instead of twice. Other multiples could be used
-   //for multi-bladed propellers or fans
+   
    rpm = 30*1000/(millis() - timeold)*rpmcount;
    timeold = millis();
    rpmcount = 0;
